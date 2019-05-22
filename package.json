@@ -41,6 +41,8 @@
   "devDependencies": {
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.0",
-    "prettier": "1.17.1"
+    "prettier": "1.17.1",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-plugin-prettier": "^2.0.1"
   }
 }
