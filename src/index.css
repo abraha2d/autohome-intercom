@@ -5,124 +5,16 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  /* for positioning simulated screen. TODO: remove */
+  height: 100vh;
   background: lightgray;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
-}
-
-.main-container {
-  height: 100vh;
-  padding: 0;
-  background: black;
-  color: white;
-  overflow: hidden;
-  margin: auto;
-
-  /* TODO: Remove */
-  width: 480px;
-  height: 320px;
-
-  display: flex;
-  flex-direction: column;
-}
-
-.status-bar {
-  height: calc(48px + 8px);
-  padding-bottom: 8px;
-  margin: 0 0 -8px;
-  position: relative;
-  align-items: center;
-  display: flex;
-}
-
-.left {
-  text-align: left;
-}
-
-.center {
-  text-align: center;
-}
-
-.right {
-  text-align: right;
-}
-
-.content-container {
-  width: unset;
-  flex-grow: 1;
-
-  border-radius: 8px 8px 0 0;
-  box-shadow: 0 0 0 2px;
-  overflow: hidden;
-
-  position: relative;
-  z-index: 1;
-
-  display: flex;
-  flex-direction: row;
-}
-
-.content {
-  width: unset;
-  flex-grow: 1;
-  padding: 4px 19px 4px;
-  display: flex;
-  flex-direction: column;
-}
-
-.icon-button {
-  border-radius: 8px;
-  border: 1px solid white;
-  margin: 4px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.icon-button:active {
-  background: white;
-  color: rgba(0, 0, 0, 0.54);
-}
-
-.scroll-container {
-  width: 56px;
-  display: flex;
-  flex-direction: column;
-  padding: 8px 8px 8px 0;
-}
-
-.scroll-button {
-  border-radius: 10px;
-  border: 1px solid white;
-  position: relative;
-  background: black;
-  z-index: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-}
-
-.scroll-button:active {
-  background: white;
-  color: rgba(0, 0, 0, 0.54);
-}
-
-/*.scroll-up-button:after,*/
-/*.scroll-down-button:after {*/
-/*  content: "";*/
-/*  display: block;*/
-/*  padding-bottom: 100%;*/
-/*}*/
-
-.scroll-indicator {
-  flex-grow: 1;
-  border: 1px solid white;
-  margin: -10px 0;
-  padding: 10px 0;
-  position: relative;
 }

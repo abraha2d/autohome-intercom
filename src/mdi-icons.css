@@ -74,13 +74,3 @@
   top: 3px;
   left: -3px;
 }
-
-.mdi-16::before {
-  font-size: 16px;
-  line-height: 16px;
-}
-
-.mdi-48::before {
-  font-size: 48px;
-  line-height: 48px;
-}

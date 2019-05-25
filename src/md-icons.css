@@ -1,18 +1,27 @@
 /* Rules for sizing the icon. */
-.material-icons.md-18 {
+/* Adapted to work with mdi-icons as well */
+.material-icons.md-18,
+.mdi.md-18::before {
   font-size: 18px;
+  line-height: 18px;
 }
 
-.material-icons.md-24 {
+.material-icons.md-24,
+.mdi.md-24::before {
   font-size: 24px;
+  line-height: 24px;
 }
 
-.material-icons.md-36 {
+.material-icons.md-36,
+.mdi.md-36::before {
   font-size: 36px;
+  line-height: 36px;
 }
 
-.material-icons.md-48 {
+.material-icons.md-48,
+.mdi.md-48::before {
   font-size: 48px;
+  line-height: 48px;
 }
 
 /* Rules for using icons as black on a light background. */

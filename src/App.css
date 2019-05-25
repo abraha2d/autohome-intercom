@@ -1,33 +1,132 @@
-.App {
-  text-align: center;
-}
+.main-container {
+  height: 100vh;
+  padding: 0;
+  background: black;
+  color: white;
+  user-select: none;
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
+
+  /* for simulating actual screen size. TODO: remove */
+  max-width: 373px;
+  max-height: 249px;
+  overflow: hidden;
+}
+
+.status-bar {
+  /* 8px compensation for .content-container curved top border */
+  height: 56px; /* 56px = 48px + 8px */
+  padding-bottom: 8px;
+  margin: 0 0 -8px;
+
+  position: relative; /* for z-index to work between this and content-container */
+  z-index: 0;
+
+  display: flex;
+  align-items: stretch;
+}
+
+.status-bar div {
+  border-radius: 8px;
+
+  /* to center contents */
+  display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.status-bar .left {
+  box-shadow: 2px 0 0 1px;
+  margin-bottom: 2px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.status-bar .center {
+  flex-grow: 2;
+}
+
+.status-bar .right {
+  box-shadow: -2px 0 0 1px;
+  margin-bottom: 2px;
+}
+
+.content-container {
+  flex-grow: 1;
+
+  position: relative; /* for z-index to work between this and status-bar */
+  z-index: 1;
+
+  /* For curved top border */
+  border-radius: 8px 8px 0 0; /* 8px = border radius */
+  box-shadow: 0 0 0 2px; /* 2px = border thickness */
+  overflow: hidden; /* to keep content from spilling outside curved border */
+
+  display: flex;
+  flex-direction: row;
+}
+
+.content {
+  flex-grow: 1;
+
+  padding: 4px 19px 4px;
+  /* 4px = 8px / 2 (other half applied in .app-button) */
+  /* 19px = 4px + 15px (compensation for bootstrap .row) */
+
+  display: flex;
+  flex-direction: column;
+}
+
+.app-button {
+  margin: 4px; /* 4px = 8px / 2 (other half applied in .icon-button) */
+  border-radius: 8px;
+  border: 1px solid white;
+}
+
+.icon-button {
+  /* to center contents */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.icon-button,
+.icon-button.md-dark:active {
+  background: black;
+  color: rgba(255, 255, 255, 1); /* taken from md-icons .md-light */
+}
+
+.icon-button.md-dark,
+.icon-button:active {
+  background: white;
+  color: rgba(0, 0, 0, 0.54); /* taken from md-icons .md-dark */
+}
+
+.scroll-container {
+  width: 48px;
+  margin: 8px 8px 8px 0; /* left spacing already applied in content-container */
+
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll-button {
+  background: black;
+  border-radius: 10px;
+  border: 1px solid white;
+
+  position: relative; /* for z-index to work between this and scroll-indicator */
+  z-index: 1;
+}
+
+.scroll-indicator {
+  flex-grow: 1;
+  border: 1px solid white;
+
+  /* 8px compensation to slide under .scroll-button curved border */
+  margin: -8px 0;
+  padding: 8px 0;
+
+  position: relative; /* for z-index to work between this and scroll-button */
+  z-index: 0;
 }
