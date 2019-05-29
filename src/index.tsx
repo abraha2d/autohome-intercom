@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { BrowserRouter as Router } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "md-icons.css";
 import "mdi-icons.css";
@@ -10,7 +11,12 @@ import * as serviceWorker from "serviceWorker";
 const MOUNT_NODE = document.getElementById("root");
 
 const render = () => {
-  ReactDOM.render(<App />, MOUNT_NODE);
+  ReactDOM.render(
+    <Router>
+      <App />
+    </Router>,
+    MOUNT_NODE
+  );
 };
 
 if (module.hot) {
