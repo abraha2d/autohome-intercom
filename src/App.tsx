@@ -1,6 +1,6 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-import Home from "apps/Home";
+import Home, { PATH as HomePath } from "apps/Home";
 import "App.css";
 
 function App() {
@@ -15,7 +15,7 @@ function App() {
       </div>
       <div className="content-container">
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path={HomePath} component={Home} />
         </Switch>
       </div>
     </div>
