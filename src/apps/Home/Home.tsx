@@ -1,6 +1,12 @@
 import * as React from "react";
 import { withRouter } from "react-router-dom";
 import { History } from "history";
+import { PATH as IntercomPath } from "apps/Intercom";
+import { PATH as CalendarPath } from "apps/Calendar";
+import { PATH as WeatherPath } from "apps/Weather";
+import { PATH as VideoPath } from "apps/Video";
+import { PATH as TimerPath } from "apps/Timer";
+import { PATH as SettingsPath } from "apps/Settings";
 
 export const PATH = "/";
 
@@ -15,7 +21,7 @@ const Home: React.FC<Props> = ({ history }) => (
         <div
           className="col app-button icon-button material-icons md-48"
           onClick={() => {
-            history.push("/intercom");
+            history.push(IntercomPath);
           }}
         >
           speaker_phone
@@ -23,7 +29,7 @@ const Home: React.FC<Props> = ({ history }) => (
         <div
           className="col app-button icon-button material-icons md-48"
           onClick={() => {
-            history.push("/calendar");
+            history.push(CalendarPath);
           }}
         >
           calendar_today
@@ -31,7 +37,7 @@ const Home: React.FC<Props> = ({ history }) => (
         <div
           className="col app-button icon-button mdi md-48 mdi-weather-partlycloudy"
           onClick={() => {
-            history.push("/weather");
+            history.push(WeatherPath);
           }}
         />
       </div>
@@ -39,7 +45,7 @@ const Home: React.FC<Props> = ({ history }) => (
         <div
           className="col app-button icon-button material-icons md-48"
           onClick={() => {
-            history.push("/video");
+            history.push(VideoPath);
           }}
         >
           videocam
@@ -47,7 +53,7 @@ const Home: React.FC<Props> = ({ history }) => (
         <div
           className="col app-button icon-button material-icons md-48"
           onClick={() => {
-            history.push("/timer");
+            history.push(TimerPath);
           }}
         >
           timer
@@ -55,7 +61,7 @@ const Home: React.FC<Props> = ({ history }) => (
         <div
           className="col app-button icon-button material-icons md-48"
           onClick={() => {
-            history.push("/settings");
+            history.push(SettingsPath);
           }}
         >
           settings
