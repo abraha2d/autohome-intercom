@@ -28,7 +28,12 @@ const Home: React.FC<Props> = ({ history }) => (
         >
           calendar_today
         </div>
-        <div className="col app-button icon-button mdi md-48 mdi-weather-partlycloudy" />
+        <div
+          className="col app-button icon-button mdi md-48 mdi-weather-partlycloudy"
+          onClick={() => {
+            history.push("/weather");
+          }}
+        />
       </div>
       <div className="row flex-grow-1">
         <div
