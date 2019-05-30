@@ -1,6 +1,14 @@
 import React from "react";
 import { Route, Switch } from "react-router";
+
+import Calendar, { PATH as CalendarPath } from "apps/Calendar";
 import Home, { PATH as HomePath } from "apps/Home";
+import Intercom, { PATH as IntercomPath } from "apps/Intercom";
+import Settings, { PATH as SettingsPath } from "apps/Settings";
+import Timer, { PATH as TimerPath } from "apps/Timer";
+import Video, { PATH as VideoPath } from "apps/Video";
+import Weather, { PATH as WeatherPath } from "apps/Weather";
+
 import "App.css";
 
 function App() {
@@ -16,6 +24,12 @@ function App() {
       <div className="content-container">
         <Switch>
           <Route exact path={HomePath} component={Home} />
+          <Route path={IntercomPath} component={Intercom} />
+          <Route path={CalendarPath} component={Calendar} />
+          <Route path={WeatherPath} component={Weather} />
+          <Route path={VideoPath} component={Video} />
+          <Route path={TimerPath} component={Timer} />
+          <Route path={SettingsPath} component={Settings} />
         </Switch>
       </div>
     </div>
