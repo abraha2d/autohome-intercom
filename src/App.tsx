@@ -19,7 +19,7 @@ function App() {
         <Switch>
           <Route exact path={Home.path} component={Home.app} />
           {apps.map(app => (
-            <Route path={app.path} component={app.app} />
+            <Route key={app.name} path={app.path} component={app.app} />
           ))}
         </Switch>
       </div>

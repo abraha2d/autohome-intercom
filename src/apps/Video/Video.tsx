@@ -24,5 +24,6 @@ const Video: React.FC<Props> = ({ history }) => (
 export default {
   app: withRouter(Video),
   path: "/video",
+  name: "Video",
   icon: "cctv"
 };

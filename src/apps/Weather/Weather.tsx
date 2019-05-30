@@ -24,5 +24,6 @@ const Weather: React.FC<Props> = ({ history }) => (
 export default {
   app: withRouter(Weather),
   path: "/weather",
+  name: "Weather",
   icon: "weather-partlycloudy"
 };
