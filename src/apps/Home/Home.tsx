@@ -1,43 +1,84 @@
 import * as React from "react";
-import { withRouter } from "react-router-dom";
-import { History } from "history";
+import { withRouter, match } from "react-router-dom";
+import { History, Location } from "history";
+
+import { chunk } from "./utils";
 
 import apps from "apps";
-import { chunk } from "apps/Home/utils";
+let chunkedApps = chunk(apps, 3);
+chunkedApps = chunkedApps.map(chunk => {
+  if (chunk.length === 3) return chunk;
+  while (chunk.length !== 3) chunk.push({});
+  return chunk;
+});
 
 type Props = {
   history: History;
+  location: Location;
+  match: match;
 };
 
-const chunkedApps = chunk(apps, 3);
+type State = {
+  startRow: number;
+};
 
-const Home: React.FC<Props> = ({ history }) => (
-  <div className="content-container">
-    <div className="content">
-      {chunkedApps.map(chunk => (
-        <div className="row flex-grow-1">
-          {chunk.map(app => (
-            <div
-              className={`col app-button icon-button mdi md-48 mdi-${app.icon}`}
-              onClick={() => {
-                history.push(app.path);
-              }}
-            />
+class Home extends React.Component<Props, State> {
+  readonly state: State = {
+    startRow: 0
+  };
+  render() {
+    let { history } = this.props;
+    const { startRow } = this.state;
+    return (
+      <div className="content-container">
+        <div className="content">
+          {chunkedApps.slice(startRow, startRow + 2).map((chunk, idx) => (
+            <div key={idx} className="row flex-grow-1">
+              {chunk.map((app, idx2) =>
+                app.name ? (
+                  <div
+                    key={app.name}
+                    className={`col app-button icon-button mdi md-48 mdi-${
+                      app.icon
+                    }`}
+                    onClick={() => {
+                      history.push(app.path);
+                    }}
+                  />
+                ) : (
+                  <div
+                    key={`spacer-${idx}-${idx2}`}
+                    className="col app-button spacer"
+                  />
+                )
+              )}
+            </div>
           ))}
         </div>
-      ))}
-    </div>
-    <div className="scroll-container">
-      <div className="scroll-button icon-button material-icons md-48">
-        keyboard_arrow_up
+        <div className="scroll-container">
+          <div
+            className="scroll-button icon-button mdi md-48 mdi-chevron-up"
+            onClick={() =>
+              this.setState({ startRow: Math.max(this.state.startRow - 1, 0) })
+            }
+          />
+          <div className="scroll-indicator" />
+          <div
+            className="scroll-button icon-button mdi md-48 mdi-chevron-down"
+            onClick={() =>
+              this.setState({
+                startRow: Math.min(
+                  this.state.startRow + 1,
+                  chunkedApps.length - 2
+                )
+              })
+            }
+          />
+        </div>
       </div>
-      <div className="scroll-indicator" />
-      <div className="scroll-button icon-button material-icons md-48">
-        keyboard_arrow_down
-      </div>
-    </div>
-  </div>
-);
+    );
+  }
+}
 
 export default {
   app: withRouter(Home),

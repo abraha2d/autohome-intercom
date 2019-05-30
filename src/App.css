@@ -83,6 +83,10 @@
   border: 1px solid white;
 }
 
+.app-button.spacer {
+  border: none;
+}
+
 .icon-button {
   /* to center contents */
   display: flex;

@@ -5,4 +5,4 @@ import Timer from "apps/Timer/Timer";
 import Video from "apps/Video/Video";
 import Weather from "apps/Weather/Weather";
 
-export default [Intercom, Calendar, Weather, Video, Timer, Settings];
+export default [Intercom, Calendar, Weather, Video, Timer, Settings, Settings];
