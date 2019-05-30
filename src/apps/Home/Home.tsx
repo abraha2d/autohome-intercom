@@ -28,8 +28,9 @@ class Home extends React.Component<Props, State> {
   readonly state: State = {
     startRow: 0
   };
+
   render() {
-    let { history } = this.props;
+    const { history } = this.props;
     const { startRow } = this.state;
     return (
       <div className="content-container">
@@ -69,7 +70,12 @@ class Home extends React.Component<Props, State> {
               )
             })
           }
-          barParams={false}
+          barParams={{
+            min: 0,
+            max: chunkedApps.length - 2,
+            size: 2,
+            start: startRow
+          }}
         />
       </div>
     );
