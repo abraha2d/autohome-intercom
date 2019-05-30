@@ -24,7 +24,7 @@ const App: React.FC<Props> = ({ history }) => (
         <Route
           component={() => (
             <div
-              className="col left icon-button mdi md-18 mdi-keyboard-backspace"
+              className="col left icon-button mdi md-24 mdi-keyboard-backspace"
               onClick={() => history.go(-1)}
             />
           )}

@@ -28,7 +28,7 @@
   align-items: stretch;
 }
 
-.status-bar div {
+.status-bar > div {
   border-radius: 8px;
 
   /* to center contents */
@@ -37,16 +37,16 @@
   align-items: center;
 }
 
-.status-bar .left {
+.status-bar > .left {
   box-shadow: 2px 0 0 1px;
   margin-bottom: 2px;
 }
 
-.status-bar .center {
+.status-bar > .center {
   flex-grow: 2;
 }
 
-.status-bar .right {
+.status-bar > .right {
   box-shadow: -2px 0 0 1px;
   margin-bottom: 2px;
 }
@@ -95,4 +95,9 @@
 .icon-button:active {
   background: white;
   color: rgba(0, 0, 0, 0.54); /* taken from md-icons .md-dark */
+}
+
+.status-bar > .icon-button.left:active {
+  background: linear-gradient(to right, black, white);
+  color: rgba(255, 255, 255, 1);
 }
