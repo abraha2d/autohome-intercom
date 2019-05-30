@@ -5,6 +5,7 @@ import { History, Location } from "history";
 import { chunk } from "./utils";
 
 import apps from "apps";
+import ScrollBar from "components/ScrollBar";
 let chunkedApps = chunk(apps, 3);
 chunkedApps = chunkedApps.map(chunk => {
   if (chunk.length === 3) return chunk;
@@ -55,26 +56,20 @@ class Home extends React.Component<Props, State> {
             </div>
           ))}
         </div>
-        <div className="scroll-container">
-          <div
-            className="scroll-button icon-button mdi md-48 mdi-chevron-up"
-            onClick={() =>
-              this.setState({ startRow: Math.max(this.state.startRow - 1, 0) })
-            }
-          />
-          <div className="scroll-indicator" />
-          <div
-            className="scroll-button icon-button mdi md-48 mdi-chevron-down"
-            onClick={() =>
-              this.setState({
-                startRow: Math.min(
-                  this.state.startRow + 1,
-                  chunkedApps.length - 2
-                )
-              })
-            }
-          />
-        </div>
+        <ScrollBar
+          onUpClick={() =>
+            this.setState({ startRow: Math.max(this.state.startRow - 1, 0) })
+          }
+          onDownClick={() =>
+            this.setState({
+              startRow: Math.min(
+                this.state.startRow + 1,
+                chunkedApps.length - 2
+              )
+            })
+          }
+          barParams={false}
+        />
       </div>
     );
   }
