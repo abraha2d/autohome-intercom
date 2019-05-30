@@ -8,8 +8,6 @@ import { PATH as VideoPath } from "apps/Video";
 import { PATH as TimerPath } from "apps/Timer";
 import { PATH as SettingsPath } from "apps/Settings";
 
-export const PATH = "/";
-
 type Props = {
   history: History;
 };
@@ -80,4 +78,7 @@ const Home: React.FC<Props> = ({ history }) => (
   </div>
 );
 
-export default withRouter(Home);
+export default {
+  app: withRouter(Home),
+  path: "/"
+};

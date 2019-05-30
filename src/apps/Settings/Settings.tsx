@@ -2,8 +2,6 @@ import * as React from "react";
 import { withRouter } from "react-router-dom";
 import { History } from "history";
 
-export const PATH = "/settings";
-
 type Props = {
   history: History;
 };
@@ -23,4 +21,7 @@ const Settings: React.FC<Props> = ({ history }) => (
   </div>
 );
 
-export default withRouter(Settings);
+export default {
+  app: withRouter(Settings),
+  path: "/settings"
+};

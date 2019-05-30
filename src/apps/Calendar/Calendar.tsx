@@ -2,8 +2,6 @@ import * as React from "react";
 import { withRouter } from "react-router-dom";
 import { History } from "history";
 
-export const PATH = "/calendar";
-
 type Props = {
   history: History;
 };
@@ -23,4 +21,7 @@ const Calendar: React.FC<Props> = ({ history }) => (
   </div>
 );
 
-export default withRouter(Calendar);
+export default {
+  app: withRouter(Calendar),
+  path: "/calendar"
+};

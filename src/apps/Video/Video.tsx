@@ -2,8 +2,6 @@ import * as React from "react";
 import { withRouter } from "react-router-dom";
 import { History } from "history";
 
-export const PATH = "/video";
-
 type Props = {
   history: History;
 };
@@ -23,4 +21,7 @@ const Video: React.FC<Props> = ({ history }) => (
   </div>
 );
 
-export default withRouter(Video);
+export default {
+  app: withRouter(Video),
+  path: "/video"
+};

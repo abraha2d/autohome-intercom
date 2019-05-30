@@ -2,8 +2,6 @@ import * as React from "react";
 import { withRouter } from "react-router-dom";
 import { History } from "history";
 
-export const PATH = "/intercom";
-
 type Props = {
   history: History;
 };
@@ -23,4 +21,7 @@ const Intercom: React.FC<Props> = ({ history }) => (
   </div>
 );
 
-export default withRouter(Intercom);
+export default {
+  app: withRouter(Intercom),
+  path: "/intercom"
+};

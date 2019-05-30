@@ -2,8 +2,6 @@ import * as React from "react";
 import { withRouter } from "react-router-dom";
 import { History } from "history";
 
-export const PATH = "/timer";
-
 type Props = {
   history: History;
 };
@@ -23,4 +21,7 @@ const Timer: React.FC<Props> = ({ history }) => (
   </div>
 );
 
-export default withRouter(Timer);
+export default {
+  app: withRouter(Timer),
+  path: "/timer"
+};

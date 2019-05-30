@@ -1,13 +1,13 @@
 import React from "react";
 import { Route, Switch } from "react-router";
 
-import Calendar, { PATH as CalendarPath } from "apps/Calendar";
-import Home, { PATH as HomePath } from "apps/Home";
-import Intercom, { PATH as IntercomPath } from "apps/Intercom";
-import Settings, { PATH as SettingsPath } from "apps/Settings";
-import Timer, { PATH as TimerPath } from "apps/Timer";
-import Video, { PATH as VideoPath } from "apps/Video";
-import Weather, { PATH as WeatherPath } from "apps/Weather";
+import Calendar from "apps/Calendar";
+import Home from "apps/Home";
+import Intercom from "apps/Intercom";
+import Settings from "apps/Settings";
+import Timer from "apps/Timer";
+import Video from "apps/Video";
+import Weather from "apps/Weather";
 
 import "App.css";
 
@@ -23,13 +23,13 @@ function App() {
       </div>
       <div className="content-container">
         <Switch>
-          <Route exact path={HomePath} component={Home} />
-          <Route path={IntercomPath} component={Intercom} />
-          <Route path={CalendarPath} component={Calendar} />
-          <Route path={WeatherPath} component={Weather} />
-          <Route path={VideoPath} component={Video} />
-          <Route path={TimerPath} component={Timer} />
-          <Route path={SettingsPath} component={Settings} />
+          <Route exact path={Home.path} component={Home.app} />
+          <Route path={Intercom.path} component={Intercom.app} />
+          <Route path={Calendar.path} component={Calendar.app} />
+          <Route path={Weather.path} component={Weather.app} />
+          <Route path={Video.path} component={Video.app} />
+          <Route path={Timer.path} component={Timer.app} />
+          <Route path={Settings.path} component={Settings.app} />
         </Switch>
       </div>
     </div>
