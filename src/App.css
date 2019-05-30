@@ -101,3 +101,8 @@
   background: linear-gradient(to right, black, white);
   color: rgba(255, 255, 255, 1);
 }
+
+.status-bar > .icon-button.right:active {
+  background: linear-gradient(to left, black, white);
+  color: rgba(255, 255, 255, 1);
+}

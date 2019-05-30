@@ -5,6 +5,7 @@ import "./App.css";
 
 import apps from "apps";
 import Home from "apps/Home";
+import Weather from "apps/Weather";
 
 type Props = {
   history: History;
@@ -31,7 +32,10 @@ const App: React.FC<Props> = ({ history }) => (
         />
       </Switch>
       <div className="col center">12:34 am</div>
-      <div className="col right">
+      <div
+        className="col right icon-button"
+        onClick={() => history.push(Weather.path)}
+      >
         75º <div className="mdi md-18 mdi-weather-sunny" />
       </div>
     </div>
