@@ -59,29 +59,31 @@ class ScrollBar extends React.Component<Props, State> {
           onClick={onUpClick}
         />
         <div className="scroll-indicator">
-          <div
-            ref={this.scrollHandleContainer}
-            className="scroll-handle-container"
-            onMouseMove={handleMouseMove}
-          >
+          {bp && (
             <div
-              className="scroll-handle"
-              style={
-                (bp && {
-                  top: `${(100 * (bp.start - bp.min)) /
-                    (bp.max + bp.size - bp.min)}%`,
-                  bottom: `${100 -
-                    (100 * (bp.start + bp.size - bp.min)) /
-                      (bp.max + bp.size - bp.min)}%`
-                }) ||
-                {}
-              }
-              onMouseDown={evt =>
-                this.setState({ mouseDown: true, mouseStart: evt.pageY })
-              }
-              onMouseUp={() => this.setState({ mouseDown: false })}
-            />
-          </div>
+              ref={this.scrollHandleContainer}
+              className="scroll-handle-container"
+              onMouseMove={handleMouseMove}
+            >
+              <div
+                className="scroll-handle"
+                style={
+                  (bp && {
+                    top: `${(100 * (bp.start - bp.min)) /
+                      (bp.max + bp.size - bp.min)}%`,
+                    bottom: `${100 -
+                      (100 * (bp.start + bp.size - bp.min)) /
+                        (bp.max + bp.size - bp.min)}%`
+                  }) ||
+                  {}
+                }
+                onMouseDown={evt =>
+                  this.setState({ mouseDown: true, mouseStart: evt.pageY })
+                }
+                onMouseUp={() => this.setState({ mouseDown: false })}
+              />
+            </div>
+          )}
         </div>
         <div
           className="scroll-button icon-button mdi md-48 mdi-chevron-down"
