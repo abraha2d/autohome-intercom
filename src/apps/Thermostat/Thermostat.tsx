@@ -7,16 +7,16 @@ type Props = {
   history: History;
 };
 
-const Calendar: React.FC<Props> = ({ history }) => (
+const Thermostat: React.FC<Props> = ({ history }) => (
   <div className="content-container">
-    <div className="content">Hi, this is Calendar!</div>
+    <div className="content">Hi, this is Thermostat!</div>
     <ScrollBar onUpClick={() => {}} onDownClick={() => {}} barParams={false} />
   </div>
 );
 
 export default {
-  app: withRouter(Calendar),
-  path: "/calendar",
-  name: "Calendar",
-  icon: "calendar"
+  app: withRouter(Thermostat),
+  path: "/thermostat",
+  name: "Thermostat",
+  icon: "thermometer"
 };

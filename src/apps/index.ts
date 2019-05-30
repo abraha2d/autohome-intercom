@@ -1,8 +1,16 @@
-import Calendar from "apps/Calendar";
 import Intercom from "apps/Intercom";
-import Settings from "apps/Settings/Settings";
-import Timer from "apps/Timer/Timer";
-import Video from "apps/Video/Video";
-import Weather from "apps/Weather/Weather";
+import Settings from "apps/Settings";
+import Thermostat from "apps/Thermostat";
+import Timer from "apps/Timer";
+import Video from "apps/Video";
+import Weather from "apps/Weather";
 
-export default [Intercom, Calendar, Weather, Video, Timer, Settings, Settings];
+export default [
+  Intercom,
+  Thermostat,
+  Weather,
+  Video,
+  Timer,
+  Settings,
+  Settings
+];

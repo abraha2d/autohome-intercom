@@ -1,6 +1,5 @@
 import * as React from "react";
 import "./ScrollBar.css";
-import { MouseEventHandler } from "react";
 
 type Props = {
   onUpClick: () => void;
@@ -28,7 +27,7 @@ class ScrollBar extends React.Component<Props, State> {
 
   scrollHandleContainer = React.createRef<HTMLDivElement>();
 
-  handleMouseMove: MouseEventHandler = evt => {
+  handleMouseMove: React.MouseEventHandler = evt => {
     const { onUpClick, onDownClick, barParams: bp } = this.props;
     const { mouseDown, mouseStart } = this.state;
     const { scrollHandleContainer } = this;
