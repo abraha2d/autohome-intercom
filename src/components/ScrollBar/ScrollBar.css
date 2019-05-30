@@ -1,0 +1,28 @@
+.scroll-container {
+  width: 48px;
+  margin: 8px 8px 8px 0; /* left spacing already applied in content-container */
+
+  display: flex;
+  flex-direction: column;
+}
+
+.scroll-button {
+  background: black;
+  border-radius: 10px;
+  border: 1px solid white;
+
+  position: relative; /* for z-index to work between this and scroll-indicator */
+  z-index: 1;
+}
+
+.scroll-indicator {
+  flex-grow: 1;
+  border: 1px solid white;
+
+  /* 8px compensation to slide under .scroll-button curved border */
+  margin: -8px 0;
+  padding: 8px 0;
+
+  position: relative; /* for z-index to work between this and scroll-button */
+  z-index: 0;
+}

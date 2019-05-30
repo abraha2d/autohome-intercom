@@ -1,0 +1,9 @@
+.app-button {
+  margin: 4px; /* 4px = 8px / 2 (other half applied in .icon-button) */
+  border-radius: 8px;
+  border: 1px solid white;
+}
+
+.app-button.spacer {
+  border: none;
+}
