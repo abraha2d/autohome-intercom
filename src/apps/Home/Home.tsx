@@ -1,12 +1,13 @@
 import * as React from "react";
 import { withRouter } from "react-router-dom";
 import { History } from "history";
-import { PATH as IntercomPath } from "apps/Intercom";
-import { PATH as CalendarPath } from "apps/Calendar";
-import { PATH as WeatherPath } from "apps/Weather";
-import { PATH as VideoPath } from "apps/Video";
-import { PATH as TimerPath } from "apps/Timer";
-import { PATH as SettingsPath } from "apps/Settings";
+
+import Calendar from "apps/Calendar";
+import Intercom from "apps/Intercom";
+import Settings from "apps/Settings";
+import Timer from "apps/Timer";
+import Video from "apps/Video";
+import Weather from "apps/Weather";
 
 type Props = {
   history: History;
@@ -19,7 +20,7 @@ const Home: React.FC<Props> = ({ history }) => (
         <div
           className="col app-button icon-button material-icons md-48"
           onClick={() => {
-            history.push(IntercomPath);
+            history.push(Intercom.path);
           }}
         >
           speaker_phone
@@ -27,7 +28,7 @@ const Home: React.FC<Props> = ({ history }) => (
         <div
           className="col app-button icon-button material-icons md-48"
           onClick={() => {
-            history.push(CalendarPath);
+            history.push(Calendar.path);
           }}
         >
           calendar_today
@@ -35,7 +36,7 @@ const Home: React.FC<Props> = ({ history }) => (
         <div
           className="col app-button icon-button mdi md-48 mdi-weather-partlycloudy"
           onClick={() => {
-            history.push(WeatherPath);
+            history.push(Weather.path);
           }}
         />
       </div>
@@ -43,7 +44,7 @@ const Home: React.FC<Props> = ({ history }) => (
         <div
           className="col app-button icon-button material-icons md-48"
           onClick={() => {
-            history.push(VideoPath);
+            history.push(Video.path);
           }}
         >
           videocam
@@ -51,7 +52,7 @@ const Home: React.FC<Props> = ({ history }) => (
         <div
           className="col app-button icon-button material-icons md-48"
           onClick={() => {
-            history.push(TimerPath);
+            history.push(Timer.path);
           }}
         >
           timer
@@ -59,7 +60,7 @@ const Home: React.FC<Props> = ({ history }) => (
         <div
           className="col app-button icon-button material-icons md-48"
           onClick={() => {
-            history.push(SettingsPath);
+            history.push(Settings.path);
           }}
         >
           settings
