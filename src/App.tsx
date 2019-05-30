@@ -1,15 +1,9 @@
 import React from "react";
 import { Route, Switch } from "react-router";
-
-import Calendar from "apps/Calendar";
-import Home from "apps/Home";
-import Intercom from "apps/Intercom";
-import Settings from "apps/Settings";
-import Timer from "apps/Timer";
-import Video from "apps/Video";
-import Weather from "apps/Weather";
-
 import "App.css";
+
+import apps from "apps";
+import Home from "apps/Home";
 
 function App() {
   return (
@@ -24,12 +18,9 @@ function App() {
       <div className="content-container">
         <Switch>
           <Route exact path={Home.path} component={Home.app} />
-          <Route path={Intercom.path} component={Intercom.app} />
-          <Route path={Calendar.path} component={Calendar.app} />
-          <Route path={Weather.path} component={Weather.app} />
-          <Route path={Video.path} component={Video.app} />
-          <Route path={Timer.path} component={Timer.app} />
-          <Route path={Settings.path} component={Settings.app} />
+          {apps.map(app => (
+            <Route path={app.path} component={app.app} />
+          ))}
         </Switch>
       </div>
     </div>

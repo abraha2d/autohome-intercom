@@ -23,5 +23,6 @@ const Settings: React.FC<Props> = ({ history }) => (
 
 export default {
   app: withRouter(Settings),
-  path: "/settings"
+  path: "/settings",
+  icon: "settings"
 };

@@ -23,5 +23,6 @@ const Calendar: React.FC<Props> = ({ history }) => (
 
 export default {
   app: withRouter(Calendar),
-  path: "/calendar"
+  path: "/calendar",
+  icon: "calendar"
 };

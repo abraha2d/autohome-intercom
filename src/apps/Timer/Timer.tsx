@@ -23,5 +23,6 @@ const Timer: React.FC<Props> = ({ history }) => (
 
 export default {
   app: withRouter(Timer),
-  path: "/timer"
+  path: "/timer",
+  icon: "timer"
 };

@@ -23,5 +23,6 @@ const Intercom: React.FC<Props> = ({ history }) => (
 
 export default {
   app: withRouter(Intercom),
-  path: "/intercom"
+  path: "/intercom",
+  icon: "radio-handheld"
 };
