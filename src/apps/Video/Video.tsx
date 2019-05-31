@@ -1,10 +1,12 @@
 import * as React from "react";
-import { withRouter } from "react-router-dom";
-import { History } from "history";
+import { match, withRouter } from "react-router-dom";
+import { History, Location } from "history";
 import ScrollBar from "components/ScrollBar";
 
 type Props = {
   history: History;
+  location: Location;
+  match: match;
 };
 
 const Video: React.FC<Props> = ({ history }) => (

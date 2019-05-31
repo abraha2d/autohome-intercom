@@ -1,5 +1,5 @@
 import * as React from "react";
-import { withRouter, match } from "react-router-dom";
+import { match, withRouter } from "react-router-dom";
 import { History, Location } from "history";
 import "./Home.css";
 

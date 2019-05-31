@@ -1,0 +1,20 @@
+.weather-container {
+  flex-grow: 1;
+  display: flex;
+}
+
+.weather-main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 36px;
+}
+
+.weather-sidecontainer {
+  padding-left: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}

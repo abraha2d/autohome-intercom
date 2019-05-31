@@ -24,6 +24,12 @@
   line-height: 48px;
 }
 
+.material-icons.md-96,
+.mdi.md-96::before {
+  font-size: 96px;
+  line-height: 96px;
+}
+
 /* Rules for using icons as black on a light background. */
 .material-icons.md-dark {
   color: rgba(0, 0, 0, 0.54);
