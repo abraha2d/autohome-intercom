@@ -36,7 +36,8 @@ const App: React.FC<Props> = ({ history }) => (
         className="col right icon-button"
         onClick={() => history.push(Weather.path)}
       >
-        75º <div className="mdi md-18 mdi-weather-sunny" />
+        --º&nbsp;&nbsp;
+        <div className="mdi md-18 mdi-cancel" />
       </div>
     </div>
     <div className="content-container">

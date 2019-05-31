@@ -76,13 +76,22 @@ class Weather extends React.Component<Props & GeolocatedProps> {
               <div className="mdi md-96 mdi-cancel" />
               <div>-- ºF</div>
             </div>
-            <div className="weather-sidecontainer">
-              {nextFCs.map(({ day, night }) => (
-                <div key={day.name} className="weather-side">
-                  {day.name}: {day.temperature || "--"}º / {night.temperature}º
-                </div>
-              ))}
-            </div>
+            <table className="weather-sidecontainer">
+              <tbody>
+                <tr>
+                  <th />
+                  <th>Hi</th>
+                  <th>Lo</th>
+                </tr>
+                {nextFCs.map(({ day, night }) => (
+                  <tr key={day.name} className="weather-side">
+                    <td>{day.name}</td>
+                    <td>{day.temperature && `${day.temperature}º`}</td>
+                    <td>{night.temperature}º</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       </div>

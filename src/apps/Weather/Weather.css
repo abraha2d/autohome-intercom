@@ -13,8 +13,12 @@
 }
 
 .weather-sidecontainer {
-  padding-left: 16px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
+}
+
+.weather-sidecontainer > tbody > tr > td,
+.weather-sidecontainer > tbody > tr > th {
+  padding-left: 16px;
 }
