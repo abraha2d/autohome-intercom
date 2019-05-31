@@ -53,12 +53,12 @@ class Weather extends React.Component<Props & GeolocatedProps> {
         </div>
       );
 
-    const mainFC = forecast.properties.periods[0];
-    if (!mainFC.isDaytime) {
-      forecast.properties.periods.splice(0, 1);
+    const nextFCs: any[] = [];
+
+    if (!forecast.properties.periods[0].isDaytime) {
+      nextFCs.push({ day: { name: "Today" } });
     }
 
-    const nextFCs: any[] = [];
     forecast.properties.periods.forEach((period: any) => {
       if (period.isDaytime) {
         nextFCs.push({ day: period });
@@ -66,22 +66,20 @@ class Weather extends React.Component<Props & GeolocatedProps> {
         nextFCs[nextFCs.length - 1].night = period;
       }
     });
-    nextFCs.splice(5);
+    nextFCs.splice(6);
 
     return (
       <div className="content-container">
         <div className="content">
           <div className="weather-container">
             <div className="weather-main">
-              <div className="mdi md-96 mdi-weather-sunny" />
-              <div>
-                {mainFC.temperature} º{mainFC.temperatureUnit}
-              </div>
+              <div className="mdi md-96 mdi-cancel" />
+              <div>-- ºF</div>
             </div>
             <div className="weather-sidecontainer">
               {nextFCs.map(({ day, night }) => (
-                <div className="weather-side">
-                  {day.name}: {day.temperature}º / {night.temperature}º
+                <div key={day.name} className="weather-side">
+                  {day.name}: {day.temperature || "--"}º / {night.temperature}º
                 </div>
               ))}
             </div>
