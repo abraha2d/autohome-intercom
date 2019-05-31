@@ -92,7 +92,7 @@ class Weather extends React.Component<Props & GeolocatedProps> {
     const nextFCs: any[] = [];
 
     if (!forecast.properties.periods[0].isDaytime) {
-      nextFCs.push({ day: { name: "Today" } });
+      nextFCs.push({ day: {} });
     }
 
     forecast.properties.periods.forEach((period: any) => {
@@ -103,6 +103,7 @@ class Weather extends React.Component<Props & GeolocatedProps> {
       }
     });
     nextFCs.splice(6);
+    nextFCs[0].day.name = "Today";
 
     return (
       <div className="content-container">
