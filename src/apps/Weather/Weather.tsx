@@ -12,18 +12,33 @@ type Props = {
 
 type State = {
   gotForecast: boolean;
+  gotStations: boolean;
+  gotObservations: boolean;
   forecast: any;
+  stations: any;
+  observations: any;
 };
 
 class Weather extends React.Component<Props & GeolocatedProps> {
   readonly state: State = {
     gotForecast: false,
-    forecast: {}
+    gotStations: false,
+    gotObservations: false,
+    forecast: {},
+    stations: {},
+    observations: {}
   };
 
   render() {
     const { isGeolocationAvailable, isGeolocationEnabled, coords } = this.props;
-    const { gotForecast, forecast } = this.state;
+    const {
+      gotForecast,
+      gotStations,
+      gotObservations,
+      forecast,
+      stations,
+      observations
+    } = this.state;
 
     let message;
     if (!isGeolocationAvailable)
@@ -31,10 +46,12 @@ class Weather extends React.Component<Props & GeolocatedProps> {
     else if (!isGeolocationEnabled)
       message = "Please enable geolocation in your browser!";
     else if (!coords) {
-      message = "Finding your location...";
+      message = "Finding location...";
       if (gotForecast) this.setState({ gotForecast: false });
+      if (gotStations) this.setState({ gotStations: false });
+      if (gotObservations) this.setState({ gotObservations: false });
     } else if (!gotForecast) {
-      message = "Fetching your forecast...";
+      message = "Getting weather forecast...";
       fetch(
         `https://api.weather.gov/points/${coords.latitude},${
           coords.longitude
@@ -43,6 +60,25 @@ class Weather extends React.Component<Props & GeolocatedProps> {
         .then(response => response.json())
         .then(response =>
           this.setState({ gotForecast: true, forecast: response })
+        );
+    } else if (!gotStations) {
+      message = "Finding nearby weather stations...";
+      fetch(
+        `https://api.weather.gov/points/${coords.latitude},${
+          coords.longitude
+        }/stations`
+      )
+        .then(response => response.json())
+        .then(response =>
+          this.setState({ gotStations: true, stations: response })
+        );
+    } else if (!gotObservations) {
+      const station = stations.features[0].properties.stationIdentifier;
+      message = `Getting current weather from station ${station}...`;
+      fetch(`https://api.weather.gov/stations/${station}/observations`)
+        .then(response => response.json())
+        .then(response =>
+          this.setState({ gotObservations: true, observations: response })
         );
     }
 
@@ -74,7 +110,12 @@ class Weather extends React.Component<Props & GeolocatedProps> {
           <div className="weather-container">
             <div className="weather-main">
               <div className="mdi md-96 mdi-cancel" />
-              <div>-- ºF</div>
+              <div>
+                {32 +
+                  1.8 *
+                    observations.features[0].properties.temperature.value}{" "}
+                ºF
+              </div>
             </div>
             <table className="weather-sidecontainer">
               <tbody>
