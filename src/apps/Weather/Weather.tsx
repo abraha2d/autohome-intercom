@@ -109,7 +109,10 @@ class Weather extends React.Component<Props & GeolocatedProps> {
         <div className="content">
           <div className="weather-container">
             <div className="weather-main">
-              <div className="mdi md-96 mdi-cancel" />
+              <div
+                className="mdi md-96 mdi-cancel"
+                title={observations.features[0].properties.textDescription}
+              />
               <div>
                 {32 +
                   1.8 *
