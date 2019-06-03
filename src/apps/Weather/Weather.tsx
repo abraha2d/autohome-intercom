@@ -2,6 +2,10 @@ import * as React from "react";
 import { geolocated, GeolocatedProps } from "react-geolocated";
 import { match, withRouter } from "react-router-dom";
 import { History, Location } from "history";
+
+import { getIcon, getShortDay } from "apps/Weather/utils";
+
+import "weather-icons/css/weather-icons.min.css";
 import "./Weather.css";
 
 type Props = {
@@ -41,15 +45,13 @@ class Weather extends React.Component<Props & GeolocatedProps> {
     } = this.state;
 
     let message;
-    if (!isGeolocationAvailable)
-      message = "Please switch to a browser with support for geolocation!";
-    else if (!isGeolocationEnabled)
-      message = "Please enable geolocation in your browser!";
+    if (!isGeolocationAvailable) message = "Geolocation not supported!";
+    else if (!isGeolocationEnabled) message = "Geolocation not enabled!";
     else if (!coords) {
       message = "Finding location...";
-      if (gotForecast) this.setState({ gotForecast: false });
-      if (gotStations) this.setState({ gotStations: false });
-      if (gotObservations) this.setState({ gotObservations: false });
+      gotForecast && this.setState({ gotForecast: false });
+      gotStations && this.setState({ gotStations: false });
+      gotObservations && this.setState({ gotObservations: false });
     } else if (!gotForecast) {
       message = "Getting weather forecast...";
       fetch(
@@ -75,7 +77,7 @@ class Weather extends React.Component<Props & GeolocatedProps> {
     } else if (!gotObservations) {
       const station = stations.features[0].properties.stationIdentifier;
       message = `Getting current weather from station ${station}...`;
-      fetch(`https://api.weather.gov/stations/${station}/observations`)
+      fetch(`https://api.weather.gov/stations/${station}/observations?limit=1`)
         .then(response => response.json())
         .then(response =>
           this.setState({ gotObservations: true, observations: response })
@@ -89,8 +91,9 @@ class Weather extends React.Component<Props & GeolocatedProps> {
         </div>
       );
 
-    const nextFCs: any[] = [];
+    const todayFC = observations.features[0].properties;
 
+    const nextFCs: any[] = [];
     if (!forecast.properties.periods[0].isDaytime) {
       nextFCs.push({ day: {} });
     }
@@ -111,28 +114,31 @@ class Weather extends React.Component<Props & GeolocatedProps> {
           <div className="weather-container">
             <div className="weather-main">
               <div
-                className="mdi md-96 mdi-cancel"
-                title={observations.features[0].properties.textDescription}
+                className={`wi wi-fw ${getIcon(todayFC.icon)}`}
+                title={todayFC.textDescription}
               />
-              <div>
-                {32 +
-                  1.8 *
-                    observations.features[0].properties.temperature.value}{" "}
-                ºF
-              </div>
+              <div>{Math.round(32 + 1.8 * todayFC.temperature.value)} ºF</div>
             </div>
             <table className="weather-sidecontainer">
               <tbody>
                 <tr>
+                  <th />
                   <th />
                   <th>Hi</th>
                   <th>Lo</th>
                 </tr>
                 {nextFCs.map(({ day, night }) => (
                   <tr key={day.name} className="weather-side">
-                    <td>{day.name}</td>
+                    <td>{getShortDay(day.name)}</td>
+                    <td>
+                      {" "}
+                      <div
+                        className={`wi wi-fw ${getIcon(day.icon)}`}
+                        title={day.textDescription}
+                      />
+                    </td>
                     <td>{day.temperature && `${day.temperature}º`}</td>
-                    <td>{night.temperature}º</td>
+                    <td>{night.temperature && `${night.temperature}º`}</td>
                   </tr>
                 ))}
               </tbody>
