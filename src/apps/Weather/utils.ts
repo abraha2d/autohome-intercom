@@ -2,6 +2,7 @@ type MAP_TYPE = {
   [prop: string]: string;
 };
 
+// TODO: Update icons using https://erikflowers.github.io/weather-icons/
 const ICON_MAP: MAP_TYPE = {
   day_skc: "wi-day-sunny", // Day / Clear
   day_few: "wi-day-sunny-overcast", // Day / Mostly Clear

@@ -1,12 +1,15 @@
 import * as React from "react";
 import { match, withRouter } from "react-router-dom";
 import { History, Location } from "history";
-import "./Home.css";
-
-import { chunk } from "./utils";
+import Icon from "@mdi/react";
+import { mdiHome } from "@mdi/js";
 
 import apps from "apps";
 import ScrollBar from "components/ScrollBar";
+
+import { chunk } from "./utils";
+import "./Home.css";
+
 let chunkedApps = chunk(apps, 3);
 chunkedApps = chunkedApps.map(chunk => {
   if (chunk.length === 3) return chunk;
@@ -40,14 +43,14 @@ class Home extends React.Component<Props, State> {
               {chunk.map((app, idx2) =>
                 app.name ? (
                   <div
+                    className="col app-button icon-button"
                     key={app.name}
-                    className={`col app-button icon-button mdi md-48 mdi-${
-                      app.icon
-                    }`}
                     onClick={() => {
                       history.push(app.path);
                     }}
-                  />
+                  >
+                    <Icon path={app.icon} size={"48px"} />
+                  </div>
                 ) : (
                   <div
                     key={`spacer-${idx}-${idx2}`}
@@ -85,5 +88,5 @@ class Home extends React.Component<Props, State> {
 export default {
   app: withRouter(Home),
   path: "/",
-  icon: "home"
+  icon: mdiHome
 };

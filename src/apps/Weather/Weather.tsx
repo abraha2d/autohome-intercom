@@ -2,10 +2,10 @@ import * as React from "react";
 import { geolocated, GeolocatedProps } from "react-geolocated";
 import { match, withRouter } from "react-router-dom";
 import { History, Location } from "history";
-
-import { getIcon, getShortDay } from "apps/Weather/utils";
-
+import { mdiWeatherPartlycloudy } from "@mdi/js";
 import "weather-icons/css/weather-icons.min.css";
+
+import { getIcon, getShortDay } from "./utils";
 import "./Weather.css";
 
 type Props = {
@@ -154,5 +154,5 @@ export default {
   app: withRouter(geolocated()(Weather)),
   path: "/weather",
   name: "Weather",
-  icon: "weather-partlycloudy"
+  icon: mdiWeatherPartlycloudy
 };

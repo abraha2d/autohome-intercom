@@ -1,6 +1,8 @@
 import * as React from "react";
 import { match, withRouter } from "react-router-dom";
 import { History, Location } from "history";
+import { mdiCctv } from "@mdi/js";
+
 import ScrollBar from "components/ScrollBar";
 
 type Props = {
@@ -20,5 +22,5 @@ export default {
   app: withRouter(Video),
   path: "/video",
   name: "Video",
-  icon: "cctv"
+  icon: mdiCctv
 };

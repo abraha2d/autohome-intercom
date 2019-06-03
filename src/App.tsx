@@ -1,11 +1,14 @@
 import React from "react";
 import { Route, Switch, match, withRouter } from "react-router";
 import { History, Location } from "history";
-import "./App.css";
+import Icon from "@mdi/react";
+import { mdiCancel, mdiKeyboardBackspace } from "@mdi/js";
 
 import apps from "apps";
 import Home from "apps/Home";
 import Weather from "apps/Weather";
+
+import "./App.css";
 
 type Props = {
   history: History;
@@ -25,9 +28,11 @@ const App: React.FC<Props> = ({ history }) => (
         <Route
           component={() => (
             <div
-              className="col left icon-button mdi md-24 mdi-keyboard-backspace"
+              className="col left icon-button"
               onClick={() => history.go(-1)}
-            />
+            >
+              <Icon path={mdiKeyboardBackspace} size={"24px"} />
+            </div>
           )}
         />
       </Switch>
@@ -36,8 +41,9 @@ const App: React.FC<Props> = ({ history }) => (
         className="col right icon-button"
         onClick={() => history.push(Weather.path)}
       >
+        {/* TODO: implement properly */}
         --º&nbsp;&nbsp;
-        <div className="mdi md-18 mdi-cancel" />
+        <Icon path={mdiCancel} size={"24px"} />
       </div>
     </div>
     <div className="content-container">

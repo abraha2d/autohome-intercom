@@ -88,13 +88,13 @@
 .icon-button,
 .icon-button.md-dark:active {
   background: black;
-  color: rgba(255, 255, 255, 1); /* taken from md-icons .md-light */
+  fill: rgba(255, 255, 255, 1); /* taken from md-icons .md-light */
 }
 
 .icon-button.md-dark,
 .icon-button:active {
   background: white;
-  color: rgba(0, 0, 0, 0.54); /* taken from md-icons .md-dark */
+  fill: rgba(0, 0, 0, 0.54); /* taken from md-icons .md-dark */
 }
 
 .status-bar > .icon-button.left:active {

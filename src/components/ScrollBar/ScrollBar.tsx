@@ -1,4 +1,7 @@
 import * as React from "react";
+import Icon from "@mdi/react";
+import { mdiChevronDown, mdiChevronUp } from "@mdi/js";
+
 import "./ScrollBar.css";
 
 type Props = {
@@ -53,10 +56,9 @@ class ScrollBar extends React.Component<Props, State> {
     const { handleMouseMove } = this;
     return (
       <div className="scroll-container">
-        <div
-          className="scroll-button icon-button mdi md-48 mdi-chevron-up"
-          onClick={onUpClick}
-        />
+        <div className="scroll-button icon-button" onClick={onUpClick}>
+          <Icon path={mdiChevronUp} size={"48px"} />
+        </div>
         <div className="scroll-indicator">
           {bp && (
             <div
@@ -84,10 +86,9 @@ class ScrollBar extends React.Component<Props, State> {
             </div>
           )}
         </div>
-        <div
-          className="scroll-button icon-button mdi md-48 mdi-chevron-down"
-          onClick={onDownClick}
-        />
+        <div className="scroll-button icon-button" onClick={onDownClick}>
+          <Icon path={mdiChevronDown} size={"48px"} />
+        </div>
       </div>
     );
   }
