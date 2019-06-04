@@ -2,11 +2,12 @@ import React from "react";
 import { Route, Switch, match, withRouter } from "react-router";
 import { History, Location } from "history";
 import Icon from "@mdi/react";
-import { mdiCancel, mdiKeyboardBackspace } from "@mdi/js";
+import { mdiCancel, mdiKeyboardBackspace, mdiSettings } from "@mdi/js";
 
 import apps from "apps";
 import Home from "apps/Home";
 import Weather from "apps/Weather";
+import Settings from "apps/Settings";
 
 import "./App.css";
 
@@ -37,14 +38,47 @@ const App: React.FC<Props> = ({ history }) => (
         />
       </Switch>
       <div className="col center">12:34 am</div>
-      <div
-        className="col right icon-button"
-        onClick={() => history.push(Weather.path)}
-      >
-        {/* TODO: implement properly */}
-        --º&nbsp;&nbsp;
-        <Icon path={mdiCancel} size={"24px"} />
-      </div>
+
+      <Switch>
+        {/* TODO: consolidate weather widget to somewhere */}
+        <Route
+          exact
+          path={Home.path}
+          component={() => (
+            <div
+              className="col right icon-button"
+              onClick={() => history.push(Weather.path)}
+            >
+              {/* TODO: implement properly */}
+              --º&nbsp;&nbsp;
+              <Icon path={mdiCancel} size={"24px"} />
+            </div>
+          )}
+        />
+        <Route
+          path={Settings.path}
+          component={() => (
+            <div
+              className="col right icon-button"
+              onClick={() => history.push(Weather.path)}
+            >
+              {/* TODO: implement properly */}
+              --º&nbsp;&nbsp;
+              <Icon path={mdiCancel} size={"24px"} />
+            </div>
+          )}
+        />
+        <Route
+          component={() => (
+            <div
+              className="col right icon-button"
+              onClick={() => history.push("settings")}
+            >
+              <Icon path={mdiSettings} size={"24px"} />
+            </div>
+          )}
+        />
+      </Switch>
     </div>
     <div className="content-container">
       <Switch>
