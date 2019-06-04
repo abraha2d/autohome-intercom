@@ -108,6 +108,10 @@ class Weather extends React.Component<Props & GeolocatedProps> {
     nextFCs.splice(6);
     nextFCs[0].day.name = "Today";
 
+    if (!nextFCs[0].day.icon) {
+      todayFC.icon = todayFC.icon.replace("day", "night");
+    }
+
     return (
       <div className="content-container">
         <div className="content">
