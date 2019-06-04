@@ -3,7 +3,7 @@ import { geolocated, GeolocatedProps } from "react-geolocated";
 import { match, withRouter } from "react-router-dom";
 import { History, Location } from "history";
 import { mdiWeatherPartlycloudy } from "@mdi/js";
-import "weather-icons/css/weather-icons.min.css";
+import "weathericons/css/weather-icons.min.css";
 
 import { getIcon, getShortDay } from "./utils";
 import "./Weather.css";
@@ -133,7 +133,9 @@ class Weather extends React.Component<Props & GeolocatedProps> {
                     <td>
                       {" "}
                       <div
-                        className={`wi wi-fw ${getIcon(day.icon)}`}
+                        className={`wi wi-fw ${getIcon(
+                          day.icon || night.icon.replace("night", "day")
+                        )}`}
                         title={day.textDescription}
                       />
                     </td>

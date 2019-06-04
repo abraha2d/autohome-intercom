@@ -5,13 +5,13 @@ type MAP_TYPE = {
 // TODO: Update icons using https://erikflowers.github.io/weather-icons/
 const ICON_MAP: MAP_TYPE = {
   day_skc: "wi-day-sunny", // Day / Clear
-  day_few: "wi-day-sunny-overcast", // Day / Mostly Clear
+  day_few: "wi-day-sunny", // Day / Mostly Clear
   day_sct: "wi-day-cloudy", // Day / Partly Cloudy
   day_bkn: "wi-day-cloudy", // Day / Mostly Cloudy
   day_ovc: "wi-cloud", // Day / Cloudy
   day_tsra: "wi-storm-showers", // Day / Showers and Thunderstorms
   night_skc: "wi-night-clear", // Night / Clear
-  night_few: "wi-night-alt-partly-cloudy", // Night / Mostly Clear
+  night_few: "wi-night-clear", // Night / Mostly Clear
   night_sct: "wi-night-alt-cloudy", // Night / Partly Cloudy
   night_bkn: "wi-night-alt-cloudy", // Night / Mostly Cloudy
   night_ovc: "wi-cloud", // Night / Cloudy
