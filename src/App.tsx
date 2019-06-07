@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Switch, match, withRouter } from "react-router";
 import { History, Location } from "history";
 import Icon from "@mdi/react";
-import { mdiCancel, mdiKeyboardBackspace, mdiSettings } from "@mdi/js";
+import { mdiKeyboardBackspace, mdiSettings } from "@mdi/js";
 
 import apps from "apps";
 import Home from "apps/Home";
@@ -49,9 +49,7 @@ const App: React.FC<Props> = ({ history }) => (
               className="col right icon-button"
               onClick={() => history.push(Weather.path)}
             >
-              {/* TODO: implement properly */}
-              --º&nbsp;&nbsp;
-              <Icon path={mdiCancel} size={"24px"} />
+              <Weather.app isWidget />
             </div>
           )}
         />
@@ -62,9 +60,7 @@ const App: React.FC<Props> = ({ history }) => (
               className="col right icon-button"
               onClick={() => history.push(Weather.path)}
             >
-              {/* TODO: implement properly */}
-              --º&nbsp;&nbsp;
-              <Icon path={mdiCancel} size={"24px"} />
+              <Weather.app isWidget />
             </div>
           )}
         />

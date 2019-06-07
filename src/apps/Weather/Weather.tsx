@@ -1,17 +1,19 @@
-import * as React from "react";
+import React from "react";
 import { geolocated, GeolocatedProps } from "react-geolocated";
 import { match, withRouter } from "react-router-dom";
 import { History, Location } from "history";
-import { mdiWeatherPartlycloudy } from "@mdi/js";
+import { mdiCancel, mdiWeatherPartlycloudy } from "@mdi/js";
 import "weathericons/css/weather-icons.min.css";
 
 import { getIcon, getShortDay } from "./utils";
 import "./Weather.css";
+import Icon from "@mdi/react";
 
 type Props = {
   history: History;
   location: Location;
   match: match;
+  isWidget: boolean;
 };
 
 type State = {
@@ -33,16 +35,44 @@ class Weather extends React.Component<Props & GeolocatedProps> {
     observations: {}
   };
 
+  static observations: any = false;
+
   render() {
-    const { isGeolocationAvailable, isGeolocationEnabled, coords } = this.props;
+    const {
+      isGeolocationAvailable,
+      isGeolocationEnabled,
+      coords,
+      isWidget
+    } = this.props;
     const {
       gotForecast,
       gotStations,
       gotObservations,
       forecast,
-      stations,
-      observations
+      stations
     } = this.state;
+
+    if (isWidget) {
+      if (Weather.observations) {
+        const todayFC = Weather.observations;
+        return (
+          <span>
+            {Math.round(32 + 1.8 * todayFC.temperature.value)}º&nbsp;
+            <div
+              className={`wi wi-fw ${getIcon(todayFC.icon)}`}
+              title={todayFC.textDescription}
+            />
+          </span>
+        );
+      } else {
+        return (
+          <span>
+            --º&nbsp;&nbsp;
+            <Icon path={mdiCancel} size={"24px"} />
+          </span>
+        );
+      }
+    }
 
     let message;
     if (!isGeolocationAvailable) message = "Geolocation not supported!";
@@ -79,9 +109,10 @@ class Weather extends React.Component<Props & GeolocatedProps> {
       message = `Getting current weather from station ${station}...`;
       fetch(`https://api.weather.gov/stations/${station}/observations?limit=1`)
         .then(response => response.json())
-        .then(response =>
-          this.setState({ gotObservations: true, observations: response })
-        );
+        .then(response => {
+          Weather.observations = response.features[0].properties;
+          this.setState({ gotObservations: true, observations: response });
+        });
     }
 
     if (message)
@@ -91,7 +122,7 @@ class Weather extends React.Component<Props & GeolocatedProps> {
         </div>
       );
 
-    const todayFC = observations.features[0].properties;
+    const todayFC = Weather.observations;
 
     const nextFCs: any[] = [];
     if (!forecast.properties.periods[0].isDaytime) {
@@ -112,17 +143,27 @@ class Weather extends React.Component<Props & GeolocatedProps> {
       todayFC.icon = todayFC.icon.replace("day", "night");
     }
 
+    console.debug("[weather] Observation:", todayFC);
+    console.debug("[weather] Forecast:", nextFCs);
+
     return (
       <div className="content-container">
         <div className="content">
           <div className="weather-container">
-            <div className="weather-main">
-              <div
-                className={`wi wi-fw ${getIcon(todayFC.icon)}`}
-                title={todayFC.textDescription}
-              />
-              <div>{Math.round(32 + 1.8 * todayFC.temperature.value)} ºF</div>
-            </div>
+            {todayFC ? (
+              <div className="weather-main">
+                <div
+                  className={`wi wi-fw ${getIcon(todayFC.icon)}`}
+                  title={todayFC.textDescription}
+                />
+                <div>{Math.round(32 + 1.8 * todayFC.temperature.value)} ºF</div>
+              </div>
+            ) : (
+              <div className="weather-main">
+                <Icon path={mdiCancel} size={"96px"} color={"white"} />
+                <div>-- ºF</div>
+              </div>
+            )}
             <table className="weather-sidecontainer">
               <tbody>
                 <tr>

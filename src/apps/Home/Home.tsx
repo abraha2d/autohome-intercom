@@ -1,4 +1,4 @@
-import * as React from "react";
+import React from "react";
 import { match, withRouter } from "react-router-dom";
 import { History, Location } from "history";
 import Icon from "@mdi/react";
