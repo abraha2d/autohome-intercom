@@ -107,10 +107,14 @@ class Weather extends React.Component<Props & GeolocatedProps> {
     } else if (!gotObservations) {
       const station = stations.features[0].properties.stationIdentifier;
       message = `Getting current weather from station ${station}...`;
-      fetch(`https://api.weather.gov/stations/${station}/observations?limit=1`)
+      fetch(`https://api.weather.gov/stations/${station}/observations`)
         .then(response => response.json())
         .then(response => {
-          Weather.observations = response.features[0].properties;
+          for (let i = 0; i < response.features.length; i++) {
+            if (response.features[i].properties.temperature.value) {
+              Weather.observations = response.features[i].properties;
+            }
+          }
           this.setState({ gotObservations: true, observations: response });
         });
     }
@@ -181,7 +185,7 @@ class Weather extends React.Component<Props & GeolocatedProps> {
                         className={`wi wi-fw ${getIcon(
                           day.icon || night.icon.replace("night", "day")
                         )}`}
-                        title={day.textDescription}
+                        title={day.shortForecast}
                       />
                     </td>
                     <td>{day.temperature && `${day.temperature}º`}</td>
