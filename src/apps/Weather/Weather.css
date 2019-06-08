@@ -1,19 +1,26 @@
 .weather-container {
-  flex-grow: 1;
+  flex: 1;
   display: flex;
 }
 
 .weather-main {
-  flex-grow: 1;
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   font-size: 48px;
-  padding-top: 24px;
+  padding-top: 8px;
+}
+
+.weather-message {
+  font-size: initial;
+  height: 3em;
+  text-align: center;
 }
 
 .weather-sidecontainer {
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;

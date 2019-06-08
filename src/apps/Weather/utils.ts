@@ -11,7 +11,8 @@ const ICON_MAP: MAP_TYPE = {
   day_ovc: "wi-cloud", // Day / Cloudy
   day_tsra: "wi-storm-showers", // Day / Showers and Thunderstorms
   day_tsra_sct: "wi-day-storm-showers",
-  day_rain: "wi-showers", // Rain, check presentWeather for conditions/intensities
+  day_tsra_hi: "wi-day-storm-showers",
+  day_rain: "wi-showers",
   night_skc: "wi-night-clear", // Night / Clear
   night_few: "wi-night-clear", // Night / Mostly Clear
   night_sct: "wi-night-alt-cloudy", // Night / Partly Cloudy
@@ -19,7 +20,8 @@ const ICON_MAP: MAP_TYPE = {
   night_ovc: "wi-cloud", // Night / Cloudy
   night_tsra: "wi-storm-showers", // Night / Showers and Thunderstorms
   night_tsra_sct: "wi-night-storm-showers",
-  night_rain: "wi-showers" // Rain, check presentWeather for conditions/intensities
+  night_tsra_hi: "wi-night-storm-showers",
+  night_rain: "wi-showers"
 };
 
 const DAY_MAP: MAP_TYPE = {

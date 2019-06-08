@@ -119,36 +119,31 @@ class Weather extends React.Component<Props & GeolocatedProps> {
         });
     }
 
-    if (message)
-      return (
-        <div className="content-container">
-          <div className="content">{message}</div>
-        </div>
-      );
-
     const todayFC = Weather.observations;
+    console.debug("[weather] Observation:", todayFC);
 
     const nextFCs: any[] = [];
-    if (!forecast.properties.periods[0].isDaytime) {
-      nextFCs.push({ day: {} });
-    }
-
-    forecast.properties.periods.forEach((period: any) => {
-      if (period.isDaytime) {
-        nextFCs.push({ day: period });
-      } else {
-        nextFCs[nextFCs.length - 1].night = period;
+    if (forecast.properties) {
+      if (!forecast.properties.periods[0].isDaytime) {
+        nextFCs.push({ day: {} });
       }
-    });
-    nextFCs.splice(6);
-    nextFCs[0].day.name = "Today";
 
-    if (!nextFCs[0].day.icon) {
-      todayFC.icon = todayFC.icon.replace("day", "night");
+      forecast.properties.periods.forEach((period: any) => {
+        if (period.isDaytime) {
+          nextFCs.push({ day: period });
+        } else {
+          nextFCs[nextFCs.length - 1].night = period;
+        }
+      });
+      nextFCs.splice(6);
+      nextFCs[0].day.name = "Today";
+
+      if (!nextFCs[0].day.icon && todayFC.icon) {
+        todayFC.icon = todayFC.icon.replace("day", "night");
+      }
+
+      console.debug("[weather] Forecast:", nextFCs);
     }
-
-    console.debug("[weather] Observation:", todayFC);
-    console.debug("[weather] Forecast:", nextFCs);
 
     return (
       <div className="content-container">
@@ -160,12 +155,19 @@ class Weather extends React.Component<Props & GeolocatedProps> {
                   className={`wi wi-fw ${getIcon(todayFC.icon)}`}
                   title={todayFC.textDescription}
                 />
+                {/* TODO: Use temperature.unitCode to convert when necessary */}
                 <div>{Math.round(32 + 1.8 * todayFC.temperature.value)} ºF</div>
+                <div className="weather-message">
+                  <span>{todayFC.textDescription}</span>
+                </div>
               </div>
             ) : (
               <div className="weather-main">
-                <Icon path={mdiCancel} size={"96px"} color={"white"} />
+                <Icon path={mdiCancel} size={"48px"} color={"white"} />
                 <div>-- ºF</div>
+                <div className="weather-message">
+                  <span>{message}</span>
+                </div>
               </div>
             )}
             <table className="weather-sidecontainer">
@@ -176,22 +178,36 @@ class Weather extends React.Component<Props & GeolocatedProps> {
                   <th>Hi</th>
                   <th>Lo</th>
                 </tr>
-                {nextFCs.map(({ day, night }) => (
-                  <tr key={day.name} className="weather-side">
-                    <td>{getShortDay(day.name)}</td>
-                    <td>
-                      {" "}
-                      <div
-                        className={`wi wi-fw ${getIcon(
-                          day.icon || night.icon.replace("night", "day")
-                        )}`}
-                        title={day.shortForecast}
-                      />
-                    </td>
-                    <td>{day.temperature && `${day.temperature}º`}</td>
-                    <td>{night.temperature && `${night.temperature}º`}</td>
-                  </tr>
-                ))}
+                {nextFCs.length
+                  ? nextFCs.map(({ day, night }) => (
+                      <tr key={day.name} className="weather-side">
+                        <td>{getShortDay(day.name)}</td>
+                        <td>
+                          <div
+                            className={`wi wi-fw ${getIcon(
+                              day.icon || night.icon.replace("night", "day")
+                            )}`}
+                            title={day.shortForecast}
+                          />
+                        </td>
+                        <td>{day.temperature && `${day.temperature}º`}</td>
+                        <td>{night.temperature && `${night.temperature}º`}</td>
+                      </tr>
+                    ))
+                  : [...Array(6)].map((_, i) => (
+                      <tr key={i} className="weather-side">
+                        <td>------</td>
+                        <td>
+                          <Icon
+                            path={mdiCancel}
+                            size={"18px"}
+                            color={"white"}
+                          />
+                        </td>
+                        <td>---º</td>
+                        <td>---º</td>
+                      </tr>
+                    ))}
               </tbody>
             </table>
           </div>
