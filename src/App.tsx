@@ -76,14 +76,12 @@ const App: React.FC<Props> = ({ history }) => (
         />
       </Switch>
     </div>
-    <div className="content-container">
-      <Switch>
-        <Route exact path={Home.path} component={Home.app} />
-        {apps.map(app => (
-          <Route key={app.name} path={app.path} component={app.app} />
-        ))}
-      </Switch>
-    </div>
+    <Switch>
+      <Route exact path={Home.path} component={Home.app} />
+      {apps.map(app => (
+        <Route key={app.name} path={app.path} component={app.app} />
+      ))}
+    </Switch>
   </div>
 );
 

@@ -20,6 +20,7 @@
   height: 56px; /* 56px = 48px + 8px */
   padding-bottom: 8px;
   margin: 0 0 -8px;
+  flex-shrink: 0;
 
   position: relative; /* for z-index to work between this and content-container */
   z-index: 0;
