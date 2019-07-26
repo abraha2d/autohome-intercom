@@ -4,7 +4,7 @@ import { match, withRouter } from "react-router-dom";
 import { History, Location } from "history";
 
 import { Icon } from "@mdi/react";
-import { mdiCancel, mdiWeatherPartlycloudy } from "@mdi/js";
+import { mdiCancel, mdiWeatherPartlyCloudy } from "@mdi/js";
 import ReactLoading from "react-loading";
 import "weathericons/css/weather-icons.min.css";
 
@@ -222,5 +222,5 @@ export default {
   app: withRouter(geolocated()(Weather)),
   path: "/weather",
   name: "Weather",
-  icon: mdiWeatherPartlycloudy
+  icon: mdiWeatherPartlyCloudy
 };
