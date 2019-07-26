@@ -4,6 +4,8 @@ import { History, Location } from "history";
 import Icon from "@mdi/react";
 import { mdiKeyboardBackspace, mdiSettings } from "@mdi/js";
 
+import { Howl } from "howler";
+
 import apps from "apps";
 import Home from "apps/Home";
 import Weather from "apps/Weather";
@@ -17,8 +19,16 @@ type Props = {
   match: match;
 };
 
+const touchSound = new Howl({
+  src: ["assets/sounds/touch.wav"]
+});
+
+const handleTouch = () => {
+  touchSound.play();
+};
+
 const App: React.FC<Props> = ({ history }) => (
-  <div className="main-container">
+  <div className="main-container" onClick={handleTouch}>
     <div className="status-bar">
       <Switch>
         <Route
