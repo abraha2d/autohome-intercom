@@ -21,6 +21,7 @@
     "react-nest-thermostat": "^1.0.8",
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
+    "react-sip": "https://github.com/abraha2d/react-sip",
     "typescript": "^3.4.5",
     "weathericons": "^2.1.0"
   },

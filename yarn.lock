@@ -5897,6 +5897,15 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+jssip@^3.2.15:
+  version "3.3.6"
+  resolved "https://registry.yarnpkg.com/jssip/-/jssip-3.3.6.tgz#53889624437ad386578159cc267fcefb06290a57"
+  integrity sha512-kyLxEQ7GBVlEi1PIWToAob7mH8WPtdUE51382vtjYC4ZUEa6qCXB4i9EwysX2bvpJUPbieZ1UPY8C6tLXQeBbA==
+  dependencies:
+    debug "^4.1.1"
+    events "^3.0.0"
+    sdp-transform "^2.7.0"
+
 jstransform@^11.0.3:
   version "11.0.3"
   resolved "https://registry.yarnpkg.com/jstransform/-/jstransform-11.0.3.tgz#09a78993e0ae4d4ef4487f6155a91f6190cb4223"
@@ -8269,6 +8278,13 @@ react-scripts@3.0.1:
   optionalDependencies:
     fsevents "2.0.6"
 
+"react-sip@https://github.com/abraha2d/react-sip":
+  version "0.8.1"
+  resolved "https://github.com/abraha2d/react-sip#addf17bc0b12106f3a5b119fa22fdbc128c11ae7"
+  dependencies:
+    jssip "^3.2.15"
+    prop-types "^15.6.2"
+
 react@0.14.7:
   version "0.14.7"
   resolved "https://registry.yarnpkg.com/react/-/react-0.14.7.tgz#76c4e5cfa204caa5aaf42b13008f0d3f6d58a133"
@@ -8737,6 +8753,11 @@ schema-utils@^1.0.0:
     ajv "^6.1.0"
     ajv-errors "^1.0.0"
     ajv-keywords "^3.1.0"
+
+sdp-transform@^2.7.0:
+  version "2.10.0"
+  resolved "https://registry.yarnpkg.com/sdp-transform/-/sdp-transform-2.10.0.tgz#03e64d342b1ff00ca0bf295f10e9a0d74b6ad128"
+  integrity sha512-E/VTLEGL0fWCMrRqi8F7Cc2lK/1pnbbELWpsFwTCOtGOREIT7nzpXju/mpb9giF0Ub4WpOkwncbLo7vRIFcJdg==
 
 select-hose@^2.0.0:
   version "2.0.0"

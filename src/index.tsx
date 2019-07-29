@@ -5,13 +5,29 @@ import "bootstrap/dist/css/bootstrap.css";
 import "index.css";
 import App from "App";
 import * as serviceWorker from "serviceWorker";
+import { SipProvider } from "react-sip";
 
 const MOUNT_NODE = document.getElementById("root");
 
 const render = () => {
   ReactDOM.render(
     <Router>
-      <App />
+      <SipProvider
+        host={process.env.REACT_APP_SIP_HOST}
+        port={parseInt(process.env.REACT_APP_SIP_PORT!)}
+        pathname={process.env.REACT_APP_SIP_PATH}
+        user={process.env.REACT_APP_SIP_USERNAME}
+        password={process.env.REACT_APP_SIP_PASSWORD}
+        extraConfig={{
+          authorization_user: process.env.REACT_APP_SIP_AUTHUSER,
+          contact_uri: `sip:${process.env.REACT_APP_SIP_USER}@${
+            process.env.REACT_APP_SIP_HOST
+          }`
+        }}
+        debug={true}
+      >
+        <App />
+      </SipProvider>
     </Router>,
     MOUNT_NODE
   );
