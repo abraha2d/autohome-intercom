@@ -1,8 +1,21 @@
 import React from "react";
 import { Route, Switch, match, withRouter } from "react-router";
 import { History, Location } from "history";
+import {
+  CALL_DIRECTION_INCOMING,
+  CALL_STATUS_IDLE,
+  callPropType,
+  sipPropType
+} from "react-sip";
+
 import Icon from "@mdi/react";
-import { mdiKeyboardBackspace, mdiSettings } from "@mdi/js";
+import {
+  mdiCallMade,
+  mdiCallReceived,
+  mdiKeyboardBackspace,
+  mdiRadioHandheld,
+  mdiSettings
+} from "@mdi/js";
 
 import { Howl } from "howler";
 
@@ -27,7 +40,7 @@ const handleTouch = () => {
   touchSound.play();
 };
 
-const App: React.FC<Props> = ({ history }) => (
+const App: React.FC<Props> = ({ history }, context) => (
   <div className="main-container" onClick={handleTouch}>
     <div className="status-bar">
       <Switch>
@@ -49,42 +62,56 @@ const App: React.FC<Props> = ({ history }) => (
       </Switch>
       <div className="col center">12:34 am</div>
 
-      <Switch>
-        {/* TODO: consolidate weather widget to somewhere */}
-        <Route
-          exact
-          path={Home.path}
-          component={() => (
-            <div
-              className="col right icon-button"
-              onClick={() => history.push(Weather.path)}
-            >
-              <Weather.app isWidget />
-            </div>
+      {context.call.status !== CALL_STATUS_IDLE ? (
+        <div
+          className="col right icon-button"
+          onClick={() => history.push("intercom")}
+        >
+          <Icon path={mdiRadioHandheld} size={"24px"} />
+          {context.call.direction === CALL_DIRECTION_INCOMING ? (
+            <Icon path={mdiCallReceived} size={"24px"} />
+          ) : (
+            <Icon path={mdiCallMade} size={"24px"} />
           )}
-        />
-        <Route
-          path={Settings.path}
-          component={() => (
-            <div
-              className="col right icon-button"
-              onClick={() => history.push(Weather.path)}
-            >
-              <Weather.app isWidget />
-            </div>
-          )}
-        />
-        <Route
-          component={() => (
-            <div
-              className="col right icon-button"
-              onClick={() => history.push("settings")}
-            >
-              <Icon path={mdiSettings} size={"24px"} />
-            </div>
-          )}
-        />
-      </Switch>
+        </div>
+      ) : (
+        <Switch>
+          {/* TODO: consolidate weather widget to somewhere */}
+          <Route
+            exact
+            path={Home.path}
+            component={() => (
+              <div
+                className="col right icon-button"
+                onClick={() => history.push(Weather.path)}
+              >
+                <Weather.app isWidget />
+              </div>
+            )}
+          />
+          <Route
+            path={Settings.path}
+            component={() => (
+              <div
+                className="col right icon-button"
+                onClick={() => history.push(Weather.path)}
+              >
+                <Weather.app isWidget />
+              </div>
+            )}
+          />
+          <Route
+            component={() => (
+              <div
+                className="col right icon-button"
+                onClick={() => history.push("settings")}
+              >
+                <Icon path={mdiSettings} size={"24px"} />
+              </div>
+            )}
+          />
+        </Switch>
+      )}
     </div>
     <Switch>
       <Route exact path={Home.path} component={Home.app} />
@@ -94,5 +121,10 @@ const App: React.FC<Props> = ({ history }) => (
     </Switch>
   </div>
 );
+
+(App as any).contextTypes = {
+  sip: sipPropType,
+  call: callPropType
+};
 
 export default withRouter(App);
