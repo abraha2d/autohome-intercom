@@ -1,5 +1,4 @@
 import React from "react";
-import { geolocated, GeolocatedProps } from "react-geolocated";
 import { match, withRouter } from "react-router-dom";
 import { History, Location } from "history";
 
@@ -24,7 +23,7 @@ type State = {
   gotObservations: boolean;
 };
 
-class Weather extends React.Component<Props & GeolocatedProps> {
+class Weather extends React.Component<Props> {
   readonly state: State = {
     gotForecast: false,
     gotStations: false,
@@ -36,47 +35,32 @@ class Weather extends React.Component<Props & GeolocatedProps> {
   static observations: any = false;
 
   render() {
-    const {
-      isGeolocationAvailable,
-      isGeolocationEnabled,
-      coords,
-      isWidget
-    } = this.props;
+    const { isWidget } = this.props;
     const { gotForecast, gotStations, gotObservations } = this.state;
+    const location = process.env.REACT_APP_LOCATION;
 
     let message;
-    if (!isGeolocationAvailable) message = "Geolocation not supported!";
-    else if (!isGeolocationEnabled) message = "Geolocation not enabled!";
-    else if (!coords) {
-      message = "Finding location...";
-      gotForecast && this.setState({ gotForecast: false });
-      gotStations && this.setState({ gotStations: false });
-      gotObservations && this.setState({ gotObservations: false });
-    } else if (!gotForecast) {
+    // gotForecast && this.setState({ gotForecast: false });
+    // gotStations && this.setState({ gotStations: false });
+    // gotObservations && this.setState({ gotObservations: false });
+    if (!gotForecast || !Weather.forecast) {
       message = "Getting forecast...";
-      fetch(
-        `https://api.weather.gov/points/${coords.latitude},${
-          coords.longitude
-        }/forecast`
-      )
+      fetch(`https://api.weather.gov/points/${location}/forecast`)
         .then(response => response.json())
         .then(response => {
           Weather.forecast = response;
           this.setState({ gotForecast: true, forecast: response });
         });
-    } else if (!gotStations) {
+    } else if (!gotStations || !Weather.stations) {
       message = "Finding stations...";
-      fetch(
-        `https://api.weather.gov/points/${coords.latitude},${
-          coords.longitude
-        }/stations`
-      )
+      fetch(`https://api.weather.gov/points/${location}/stations`)
         .then(response => response.json())
         .then(response => {
           Weather.stations = response;
           this.setState({ gotStations: true });
         });
-    } else if (!gotObservations) {
+    } else if (!gotObservations || !Weather.observations) {
+      console.log(Weather.stations);
       const station = Weather.stations.features[0].properties.stationIdentifier;
       message = `Found station ${station}...`;
       fetch(`https://api.weather.gov/stations/${station}/observations`)
@@ -219,7 +203,7 @@ class Weather extends React.Component<Props & GeolocatedProps> {
 }
 
 export default {
-  app: withRouter(geolocated()(Weather)),
+  app: withRouter(Weather),
   path: "/weather",
   name: "Weather",
   icon: mdiWeatherPartlyCloudy
